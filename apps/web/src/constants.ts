@@ -18,6 +18,39 @@ export const CB_SW_FACTORY_ADDRESS =
   '0x0BA5ED0c6AA8c49038F819E587E2633c4A9F428a';
 export const magicSpendAddress = "0x011A61C07DbF256A68256B1cB51A5e246730aB92";
 
+export const coinbaseSmartWalletABI = [
+  {
+    type: "function",
+    name: "executeBatch",
+    inputs: [
+      {
+        name: "calls",
+        type: "tuple[]",
+        internalType: "struct CoinbaseSmartWallet.Call[]",
+        components: [
+          {
+            name: "target",
+            type: "address",
+            internalType: "address",
+          },
+          {
+            name: "value",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "data",
+            type: "bytes",
+            internalType: "bytes",
+          },
+        ],
+      },
+    ],
+    outputs: [],
+    stateMutability: "payable",
+  },
+];
+
 export const RegistrarControllerABI = [
   {
     "type": "constructor",
@@ -1021,4 +1054,4 @@ export const RegistrarControllerABI = [
     "name": "Unauthorized",
     "inputs": []
   }
-]
+];
