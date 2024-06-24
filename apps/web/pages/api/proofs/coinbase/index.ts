@@ -110,7 +110,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   });
 
   if (!attestations?.length) {
-    return res.status(200).json({ result: { attestations } });
+    return res
+      .status(200)
+      .json({
+        result: {
+          attestations,
+          chain,
+          address,
+          verifiedAccountSchemaId,
+          verifiedCb1AccountSchemaId,
+        },
+      });
   }
   const attestationsRes = attestations.map(
     (attestation) => JSON.parse(attestation.decodedDataJson)[0] as VerifiedAccount,
