@@ -38,7 +38,7 @@ type VerifiedAccount = {
 
 const expiry = (process.env.USERNAMES_SIGNATURE_EXPIRATION_SECONDS as unknown as number) ?? 300;
 const previousClaimsKVPrefix = 'username:claims:';
-const chain = isDevelopment ? baseSepolia : base;
+const chain = process.env.APP_STAGE == 'development' ? baseSepolia : base;
 
 async function signMessage(claimerAddress: `0x${string}`) {
   const account = privateKeyToAccount(trustedSignerPKey);
@@ -110,17 +110,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   });
 
   if (!attestations?.length) {
-    return res
-      .status(200)
-      .json({
-        result: {
-          attestations,
-          chain,
-          address,
-          verifiedAccountSchemaId,
-          verifiedCb1AccountSchemaId,
-        },
-      });
+    return res.status(200).json({
+      result: {
+        attestations,
+        chain,
+        address,
+        verifiedAccountSchemaId,
+        verifiedCb1AccountSchemaId,
+      },
+    });
   }
   const attestationsRes = attestations.map(
     (attestation) => JSON.parse(attestation.decodedDataJson)[0] as VerifiedAccount,
