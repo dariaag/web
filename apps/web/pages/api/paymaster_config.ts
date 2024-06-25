@@ -17,10 +17,4 @@ const paymasterService = process.env.PAYMASTER_SERVICE_URL!;
 export const paymasterClient = createClient({
     chain: baseSepolia,
     transport: http(paymasterService),
-  }).extend(paymasterActionsEip7677({ entryPoint: ENTRYPOINT_ADDRESS_V06 }));
-
-// const cloudPaymaster = createPimlicoPaymasterClient({
-//     chain: baseSepolia,
-//     transport: http(rpcUrl),
-//     entryPoint: ENTRYPOINT_ADDRESS_V06,
-//   });
+  }).extend(paymasterActionsEip7677(ENTRYPOINT_ADDRESS_V06));

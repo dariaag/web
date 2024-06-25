@@ -35,9 +35,18 @@ export function Paymaster() {
                     contracts: [
                         {
                             address: "0x22", // change this
-                            abi: RegistrarControllerABI, // fix error
+                            abi: RegistrarControllerABI as Abi, // fix error
                             functionName: "register",
-                            args: [] // get args
+                            args: [
+                                {
+                                    name: "Name",
+                                    owner: account.address,
+                                    duration: 86400,
+                                    resolver: "0x0",
+                                    data: [],
+                                    reverseRecord: true
+                                }
+                            ] // get args
                         }
                     ], capabilities
                 });
